@@ -35,7 +35,7 @@ func resourceRedashQuery() *schema.Resource {
 			"schedule": {
 				Type:     schema.TypeMap,
 				Optional: true,
-			}
+			},
 		},
 	}
 }
@@ -50,7 +50,7 @@ func resourceRedashQueryCreate(ctx context.Context, d *schema.ResourceData, meta
 		Query:        d.Get("query").(string),
 		DataSourceID: d.Get("data_source_id").(int),
 		Description:  d.Get("description").(string),
-		Schedule:  	  d.Get("schedule").(map),
+		Schedule:     d.Get("schedule").(interface{}),
 	}
 
 	query, err := c.CreateQuery(&createPayload)
@@ -103,7 +103,7 @@ func resourceRedashQueryUpdate(ctx context.Context, d *schema.ResourceData, meta
 		Query:        d.Get("query").(string),
 		DataSourceID: d.Get("data_source_id").(int),
 		Description:  d.Get("description").(string),
-		Schedule:     d.Get("schedule").(string),
+		Schedule:     d.Get("schedule").(interface{}),
 	}
 
 	_, err = c.UpdateQuery(id, &updatePayload)
