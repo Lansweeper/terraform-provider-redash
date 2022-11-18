@@ -10,6 +10,7 @@ resource "redash_query" "my_query" {
   data_source_id = redash_data_source.acme_corp.id
   query          = "SELECT 1 + 1"
   description    = "A query like no other"
+  schedule       = {interval: 3600, time: "03:00"}
 }
 
 
@@ -20,15 +21,16 @@ output "example" {
 
 ## Argument Reference
 
-* `name` - (Required) Name of Redash query
-* `query` - (Required) Query using the query language native to the data source
-* `data_source_id` - (Required) ID of the data source
-* `description` - (Optional) Description of the Redash query
+- `name` - (Required) Name of Redash query
+- `query` - (Required) Query using the query language native to the data source
+- `data_source_id` - (Required) ID of the data source
+- `description` - (Optional) Description of the Redash query
+- `schedule` - (Optional) Object that contains interval in seconds and time to execute a Redash query
 
 ## Attribute Reference
 
-* `id` - Redash query ID
-* `name` - Name of Redash query
-* `query` - Query using the query language native to the data source
-* `data_source_id` - ID of the data source
-* `description` - Description of the Redash query
+- `id` - Redash query ID
+- `name` - Name of Redash query
+- `query` - Query using the query language native to the data source
+- `data_source_id` - ID of the data source
+- `description` - Description of the Redash query
