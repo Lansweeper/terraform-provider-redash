@@ -46,6 +46,7 @@ func resourceRedashQueryCreate(ctx context.Context, d *schema.ResourceData, meta
 		Query:        d.Get("query").(string),
 		DataSourceID: d.Get("data_source_id").(int),
 		Description:  d.Get("description").(string),
+		Schedule:  	  d.Get("schedule").(string),
 	}
 
 	query, err := c.CreateQuery(&createPayload)
