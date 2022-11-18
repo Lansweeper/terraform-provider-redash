@@ -16,12 +16,12 @@ output "example" {
 
 ## Argument Reference
 
-- `id` - (Required) Query ID to load
+* `id` - (Required) Query ID to load
 
 ## Attribute Reference
 
-- `id` - Redash ID of this query
-- `name` - Name of Redash query
-- `query` - Query using the query language native to the data source
-- `data_source_id` - ID of the data source
-- `description` - Description of the Redash query
+* `id` - Redash ID of this query
+* `name` - Name of Redash query
+* `query` - Query using the query language native to the data source
+* `data_source_id` - ID of the data source
+* `description` - Description of the Redash query

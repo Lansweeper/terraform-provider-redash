@@ -21,16 +21,16 @@ output "example" {
 
 ## Argument Reference
 
-- `name` - (Required) Name of Redash query
-- `query` - (Required) Query using the query language native to the data source
-- `data_source_id` - (Required) ID of the data source
-- `description` - (Optional) Description of the Redash query
-- `schedule` - (Optional) Object that contains interval in seconds and time to execute a Redash query
+* `name` - (Required) Name of Redash query
+* `query` - (Required) Query using the query language native to the data source
+* `data_source_id` - (Required) ID of the data source
+* `description` - (Optional) Description of the Redash query
+* `schedule` - (Optional) Object that contains interval in seconds and time to execute a Redash query
 
 ## Attribute Reference
 
-- `id` - Redash query ID
-- `name` - Name of Redash query
-- `query` - Query using the query language native to the data source
-- `data_source_id` - ID of the data source
-- `description` - Description of the Redash query
+* `id` - Redash query ID
+* `name` - Name of Redash query
+* `query` - Query using the query language native to the data source
+* `data_source_id` - ID of the data source
+* `description` - Description of the Redash query
