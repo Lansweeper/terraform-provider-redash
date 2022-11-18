@@ -32,6 +32,10 @@ func resourceRedashQuery() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"schedule": {
+				Type:     schema.TypeMap,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -46,6 +50,7 @@ func resourceRedashQueryCreate(ctx context.Context, d *schema.ResourceData, meta
 		Query:        d.Get("query").(string),
 		DataSourceID: d.Get("data_source_id").(int),
 		Description:  d.Get("description").(string),
+		Schedule:     d.Get("schedule").(interface{}),
 	}
 
 	query, err := c.CreateQuery(&createPayload)
@@ -78,6 +83,7 @@ func resourceRedashQueryRead(_ context.Context, d *schema.ResourceData, meta int
 	_ = d.Set("query", query.Query)
 	_ = d.Set("data_source_id", query.DataSourceID)
 	_ = d.Set("description", query.Description)
+	_ = d.Set("schedule", query.Schedule)
 
 	return diags
 }
@@ -97,6 +103,7 @@ func resourceRedashQueryUpdate(ctx context.Context, d *schema.ResourceData, meta
 		Query:        d.Get("query").(string),
 		DataSourceID: d.Get("data_source_id").(int),
 		Description:  d.Get("description").(string),
+		Schedule:     d.Get("schedule").(interface{}),
 	}
 
 	_, err = c.UpdateQuery(id, &updatePayload)
