@@ -1,0 +1,65 @@
+version: 2.1
+
+orbs:
+  tfsec: mycodeself/tfsec@1.1.0
+  terraform: circleci/terraform@3.0.1
+  node: circleci/node@5.0.1
+
+jobs:
+  test:
+    executor: terraform/default
+    steps:
+      - checkout
+      - terraform/init:
+          path: .
+      - terraform/validate:
+          path: .
+      - terraform/fmt:
+          path: .
+
+  tfsec-scan:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+      - tfsec/install
+      - tfsec/scan:
+          directory: .
+
+  lint:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+      - run:
+          name: Install tflint
+          command: |
+            curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | sh
+      - run:
+          name: Lint code
+          command: tflint --init && tflint .
+
+  release:
+    executor: node/default
+    steps:
+      - checkout
+      - run:
+          name: Release with semantic-release
+          command: npx semantic-release
+
+workflows:
+  main:
+    jobs:
+      - test
+      - lint
+      - tfsec-scan
+      - release:
+          requires:
+            - lint
+            - test
+            - tfsec-scan
+          context:
+            - lec-github-release
+          filters:
+            branches:
+              only: master
