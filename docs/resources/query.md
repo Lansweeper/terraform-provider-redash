@@ -33,4 +33,4 @@ output "example" {
 * `name` - Name of Redash query
 * `query` - Query using the query language native to the data source
 * `data_source_id` - ID of the data source
-- `description` - Description of the Redash query
+* `description` - Description of the Redash query
