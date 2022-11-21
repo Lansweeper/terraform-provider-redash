@@ -1,4 +1,4 @@
-module github.com/Lansweeper/terraform-provider-redash
+module github.com/digitalpoetry/terraform-provider-redash
 
 go 1.17
 
