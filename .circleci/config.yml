@@ -23,7 +23,7 @@ jobs:
   #                   \"display_identifier\":\"$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME\"
   #                 }
   #               },
-  #               \"type\": \"registry-modules\"
+  #               \"type\": \"registry-providers\"
   #             }
   #           }" > payload.json
   #           curl \
