@@ -5,19 +5,19 @@ orbs:
   terraform: circleci/terraform@3.0.1
   go: circleci/go@1.7.1
 
-# executors:
-#   go:
-#     description: Executor for building Go based application
-#     docker:
-#       - image: cimg/golang:1.17
+executors:
+  go-executor:
+    docker:
+      - image: cimg/golang:1.17
 
 jobs:
   compile-and-test:
-    docker:
-      - image: cimg/golang:1.17
+    # docker:
+    #   - image: cimg/golang:1.17
     # executor:
     #   name: go/default
     #   tag: '1.17'
+    executor: go-executor
     steps:
       - checkout
       - go/load-cache
@@ -31,11 +31,12 @@ jobs:
           command: make all
 
   goreleaser:
-    docker:
-      - image: cimg/golang:1.17
+    # docker:
+    #   - image: cimg/golang:1.17
     # executor:
     #   name: go/default
     #   tag: '1.17'
+    executor: go-executor
     steps:
       - checkout
       - run: 
