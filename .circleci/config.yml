@@ -1,0 +1,72 @@
+version: 2.1
+
+orbs:
+  tfsec: mycodeself/tfsec@1.1.0
+  terraform: circleci/terraform@3.0.1
+  go: circleci/go@1.7.1
+
+# executors:
+#   go:
+#     description: Executor for building Go based application
+#     docker:
+#       - image: cimg/golang:1.17
+
+jobs:
+  test:
+    name: Compile & Test
+    # docker:
+    #   - image: cimg/golang:1.17
+    executor:
+      name: go/default
+      tag: '1.17'
+    steps:
+      - checkout
+      - go/load-cache
+      - go/mod-download
+      - go/save-cache
+      - run: 
+          name: Test
+          command: make test
+      - run: 
+          name: Compile
+          command: make all
+
+  goreleaser:
+    # docker:
+    #   - image: cimg/golang:1.17
+    executor:
+      name: go/default
+      tag: '1.17'
+    steps:
+      - checkout
+      - run: 
+          name: Unshallow
+          command: git fetch --prune --unshallow
+      - go/load-cache
+      - go/mod-download
+      - go/save-cache
+      - run: 
+          name: Import GPG key
+          command: echo -e "$GPG_KEY" | gpg --import
+      - run: 
+          name: Run GoReleaser
+          command: curl -sfL https://goreleaser.com/static/run | bash
+
+
+workflows:
+  main:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: master
+      - goreleaser:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
+                - beta
+            tags:
+              only: /^v.*/
