@@ -14,11 +14,11 @@ orbs:
 jobs:
   test:
     name: Compile & Test
-    # docker:
-    #   - image: cimg/golang:1.17
-    executor:
-      name: go/default
-      tag: '1.17'
+    docker:
+      - image: cimg/golang:1.17
+    # executor:
+    #   name: go/default
+    #   tag: '1.17'
     steps:
       - checkout
       - go/load-cache
@@ -32,11 +32,11 @@ jobs:
           command: make all
 
   goreleaser:
-    # docker:
-    #   - image: cimg/golang:1.17
-    executor:
-      name: go/default
-      tag: '1.17'
+    docker:
+      - image: cimg/golang:1.17
+    # executor:
+    #   name: go/default
+    #   tag: '1.17'
     steps:
       - checkout
       - run: 
