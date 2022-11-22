@@ -12,7 +12,7 @@ orbs:
 #       - image: cimg/golang:1.17
 
 jobs:
-  test:
+  compile-and-test:
     name: Compile & Test
     docker:
       - image: cimg/golang:1.17
@@ -56,7 +56,7 @@ jobs:
 workflows:
   main:
     jobs:
-      - test:
+      - compile-and-test:
           filters:
             branches:
               only: master
