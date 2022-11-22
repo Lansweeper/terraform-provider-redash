@@ -12,8 +12,6 @@ executors:
 
 jobs:
   compile-and-test:
-    # docker:
-    #   - image: cimg/golang:1.17
     # executor:
     #   name: go/default
     #   tag: '1.17'
@@ -31,8 +29,6 @@ jobs:
           command: make all
 
   goreleaser:
-    # docker:
-    #   - image: cimg/golang:1.17
     # executor:
     #   name: go/default
     #   tag: '1.17'
